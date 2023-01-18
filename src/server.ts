@@ -8,15 +8,12 @@ const userSchema = z.object({
   age: z.number().min(18, { message: "at least 18 years" }),
 });
 
-type User = z.infer<typeof userSchema>;
+export type User = z.infer<typeof userSchema>;
 
-function saveUser(user: User) {
+export function saveUser(user: User) {
   try {
-    const { name, age } = userSchema.parse(user);
-    console.log(name, age);
+    return userSchema.parse(user);
   } catch (error) {
-    console.log("errou feio");
+    return error;
   }
 }
-
-saveUser({ name: "matheus", age: 18 });
